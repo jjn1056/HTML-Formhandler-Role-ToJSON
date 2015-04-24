@@ -24,6 +24,18 @@ BEGIN {
     required => 1);
 }
 
-ok my $form = MyApp::Form::Email->new;
+{
+  ok my $form = MyApp::Form::Email->new;
+  ok !$form->process(params=>+{a=>1});
+  ok my $data = $form->TO_JSON;
+  ok $data->{error_by_field}->{email};
+}
+
+{
+  ok my $form = MyApp::Form::Email->new;
+  ok $form->process(params=>+{email=>'jjn@yahoo.com', fname=>'aaa', lname=>'ddd'});
+  ok my $data = $form->TO_JSON;
+  ok $data->{fields}->{email};
+}
 
 done_testing;
