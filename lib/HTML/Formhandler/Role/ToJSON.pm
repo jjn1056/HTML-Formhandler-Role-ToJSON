@@ -2,6 +2,8 @@ package HTML::Formhandler::Role::ToJSON;
 
 use Moose::Role;
 
+our $VERSION = '0.002';
+
 sub prepare_error_response {  
   return +{
     form_errors => $_[0]->form_errors,
